@@ -38,6 +38,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/taxi
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+      USER_SERVICE_URL: http://user-service:8081
+      NOTIFICATION_SERVICE_URL: http://notification-service:8083
 
   notification-service:
     build: ./notification-service
