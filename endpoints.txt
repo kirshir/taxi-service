@@ -1,0 +1,73 @@
+Регистрация пассажира
+POST http://localhost:8081/passengers
+
+{
+    "name": "Иван Иванов",
+    "email": "ivan@example.com",
+    "phone": "+79001112233"
+}
+
+Получение пассажира по ID
+GET http://localhost:8081/passengers/1
+
+
+Регистрация водителя
+POST http://localhost:8081/drivers
+
+{
+    "name": "Иван Водилов",
+    "email": "vodilov@driver.ru",
+    "phone": "+79161234567",
+    "licenseNumber": "AB12121212"
+}
+
+Получение водителя по ID
+GET http://localhost:8081/drivers/1
+
+
+Обновление статуса водителя (FREE, BUSY, OFFLINE)
+PATCH http://localhost:8081/drivers/1/status?status=BUSY
+
+
+Получение списка свободных водителей
+GET http://localhost:8081/drivers/free
+
+
+Создание поездки (автоматическое назначение водителя)
+POST http://localhost:8082/trips
+
+{
+    "passengerId": 1,
+    "origin": "ул. Ленина, 10",
+    "destination": "ул. Гагарина, 25"
+}
+
+Получение поездки по ID
+GET http://localhost:8082/trips/1
+
+
+Получение истории поездок пассажира
+GET http://localhost:8082/trips?passenger_id=1
+
+
+Обновление статуса поездки (DRIVER_ASSIGNED, STARTED, COMPLETED, CANCELLED)
+PATCH http://localhost:8082/trips/1/status?status=STARTED
+
+
+Оценка поездки пассажиром (1–5 звёзд)
+PATCH http://localhost:8082/trips/1/rating?rating=5
+
+
+Создание уведомления (вызывается другими сервисами)
+POST http://localhost:8083/notifications
+
+{
+    "tripId": 1,
+    "recipientType": "PASSENGER",
+    "recipientId": 1,
+    "message": "Ваша поездка создана, водитель назначен"
+}
+
+
+Получение всех уведомлений по поездке
+GET http://localhost:8083/notifications?trip_id=1

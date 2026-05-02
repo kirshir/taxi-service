@@ -80,7 +80,7 @@ public class TripService {
         trip.setStatus("DRIVER_ASSIGNED");
 
         userClient.updateDriverStatus(driverId, "BUSY");
-        trip.setPrice(500.0);
+        trip.setPrice(100.0);
 
         Trip savedTrip = tripRepository.save(trip);
 

@@ -1,4 +1,4 @@
-package com.taxi.user_service.entity;
+package com.example.user_service.entity;
 
 import java.time.LocalDateTime;
 

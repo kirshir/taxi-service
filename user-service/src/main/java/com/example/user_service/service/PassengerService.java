@@ -1,12 +1,12 @@
-package com.taxi.user_service.service;
+package com.example.user_service.service;
 
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.taxi.user_service.entity.Passenger;
-import com.taxi.user_service.repository.PassengerRepository;
+import com.example.user_service.entity.Passenger;
+import com.example.user_service.repository.PassengerRepository;
 
 @Service
 public class PassengerService {

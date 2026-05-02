@@ -1,19 +1,19 @@
-package com.taxi.user_service.controller;
+package com.example.user_service.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.taxi.user_service.entity.Driver;
-import com.taxi.user_service.service.DriverService;
+import com.example.user_service.entity.Driver;
+import com.example.user_service.service.DriverService;
 
 @RestController
 @RequestMapping("/drivers")
@@ -32,7 +32,7 @@ public class DriverController {
         return driverService.getDriver(id);
     }
     
-    @PutMapping("/{id}/status")
+    @PatchMapping("/{id}/status")
     public Driver updateStatus(@PathVariable Long id, @RequestParam String status) {
         return driverService.updateStatus(id, status);
     }
