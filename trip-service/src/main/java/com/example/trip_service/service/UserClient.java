@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -38,6 +39,7 @@ public class UserClient {
             System.out.println("Массив водителей: " + java.util.Arrays.toString(drivers));
             
             if (drivers != null && drivers.length > 0) {
+                @SuppressWarnings("unchecked")
                 Map<String, Object> firstDriver = (Map<String, Object>) drivers[0];
                 Long driverId = ((Number) firstDriver.get("id")).longValue();
                 System.out.println("Назначен водитель ID: " + driverId);
@@ -45,9 +47,9 @@ public class UserClient {
             }
             
             throw new RuntimeException("Нет свободных водителей");
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
-            System.err.println("ОШИБКА в findFreeDriver: " + e.getMessage());
-            e.printStackTrace();
             throw new RuntimeException("Ошибка поиска водителя: " + e.getMessage());
         }
     }
@@ -56,13 +58,12 @@ public class UserClient {
         try {
             String url = userServiceUrl + "/drivers/" + driverId + "/status?status=" + status;
             System.out.println("URL запроса: " + url);
-            
-            restTemplate.put(url, null);
-            System.out.println("PUT выполнен успешно");
-            
+
+            restTemplate.exchange(url, HttpMethod.PATCH, null, Void.class);
+            System.out.println("PATCH выполнен успешно");
+
         } catch (Exception e) {
             System.err.println("ОШИБКА в updateDriverStatus: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 }
